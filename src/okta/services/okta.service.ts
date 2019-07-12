@@ -33,7 +33,7 @@ import { Observable, Observer } from 'rxjs';
 @Injectable()
 export class OktaAuthService {
     protected oktaAuth: OktaAuth;
-    protected config: OktaConfig;
+    private config: OktaConfig;
     private observers: Observer<boolean>[];
     $authenticationState: Observable<boolean>;
 
@@ -71,7 +71,7 @@ export class OktaAuthService {
       return !!(accessToken || idToken);
     }
 
-    private async emitAuthenticationState(state: boolean) {
+    protected async emitAuthenticationState(state: boolean) {
       this.observers.forEach(observer => observer.next(state));
     }
 
